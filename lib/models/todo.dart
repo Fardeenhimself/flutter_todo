@@ -1,13 +1,24 @@
-class Todo {
+import 'package:hive_flutter/hive_flutter.dart';
+part 'todo.g.dart';
+
+@HiveType(typeId: 0)
+class Todo extends HiveObject {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
-  final String addedAt;
+
+  @HiveField(2)
+  final DateTime addedAt;
+
+  @HiveField(3)
   final bool isCompleted;
 
   Todo({
     required this.id,
     required this.name,
-    required this.addedAt,
+    DateTime? addedAt,
     this.isCompleted = false,
-  });
+  }) : addedAt = addedAt ?? DateTime.now();
 }
