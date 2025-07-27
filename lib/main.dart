@@ -1,6 +1,8 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todo/providers/todo_provider.dart';
+import 'package:flutter_todo/screens/animated_splash_screen.dart';
 import 'package:flutter_todo/screens/home_screen.dart';
 import 'package:flutter_todo/utils/theme/dark_theme.dart';
 import 'package:flutter_todo/utils/theme/light_theme.dart';
@@ -35,7 +37,7 @@ class TodoApp extends StatelessWidget {
     return MaterialApp(
       theme: lighTheme,
       darkTheme: darkTheme,
-      home: HomeScreen(),
+      home: AnimatedSplashScreenWidget(),
     );
   }
 }
