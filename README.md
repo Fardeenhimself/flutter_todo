@@ -1,16 +1,83 @@
-# flutter_todo
 
-A new Flutter project.
+# Todo App (Flutter + Riverpod + HIVE)
 
-## Getting Started
+A simple, fast, and offline-capable Todo app built with Flutter.  
+This project uses **Riverpod** for state management and **Hive** for local data storage, along with a beautiful **animated splash screen**. Supports both **light** and **dark** mode.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Features
+
+- ✅ Add, complete, and delete todo tasks
+- ✅ Filter tasks by: All / Completed / Incomplete
+- ✅ Stores data locally using Hive (no internet needed)
+- ✅ Riverpod for efficient and reactive state management
+- ✅ Beautiful and smooth animated splash screen
+- ✅ Modern Material 3 UI
+- ✅ Optimized with light and dark mode.
+
+
+## Demo
+
+ Download the app under release section.
+
+
+## Screenshots
+
+![Splash Screen](screenshots/splash.png)
+![Home](screenshots/home.png)
+![Dhikr](screenshots/dhikr.png)
+![Selection](screenshots/selection.png)
+![Counter](screenshots/counter.png)
+![Home_DarkMode](screenshots/home_dark.png)
+![Counter_DarkMode](screenshots/counter_dark.png)
+![About](screenshots/about.png)
+
+
+## Tech Stack
+
+- [Flutter](https://flutter.dev/)
+- [Riverpod](https://riverpod.dev/)
+- [Hive](https://docs.hivedb.dev/)
+- [intl](https://pub.dev/packages/intl)
+- [animated_splash_screen](https://pub.dev/packages/animated_splash_screen)
+
+
+
+
+
+## How to run?
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/your-username/todo_app_flutter.git
+   cd todo_app_flutter
+
+2. **Install dependencies**
+```flutter pub get ```
+
+
+3. **Generate Hive Adapter**
+```flutter packages pub run build_runner build```
+
+4. **Run the app** 
+```flutter run```
+## FAQ
+
+#### Does is have any backend?
+
+Ans: No, the app doesn't have any backend. All info are stored locally using HIVE.
+
+#### Will the screen update with functionalities?
+
+Ans: Yes
+
+### State is managed?
+
+Ans: Yes.
+
+## Author
+
+- Github: https://github.com/Fardeenhimself
+- To know more, email fardeen.cse20@gmail.com 
