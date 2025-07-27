@@ -20,6 +20,22 @@ class ToDoNotifier extends StateNotifier<List<Todo>> {
     todoBox.put(newTodo.id, newTodo);
     state = todoBox.values.toList();
   }
+
+  //toggle todo
+  void toggleTodo(String id) {
+    final todo = todoBox.get(id);
+    if (todo != null) {
+      todo.isCompleted = !todo.isCompleted;
+      todo.save();
+      state = todoBox.values.toList();
+    }
+  }
+
+  //delete todo
+  void deleteTodo(String id) {
+    todoBox.delete(id);
+    state = todoBox.values.toList();
+  }
 }
 
 final todoListProvider = StateNotifierProvider<ToDoNotifier, List<Todo>>((ref) {
