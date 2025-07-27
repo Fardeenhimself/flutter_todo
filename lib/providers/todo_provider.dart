@@ -12,13 +12,17 @@ class ToDoNotifier extends StateNotifier<List<Todo>> {
   //hive box of todo's
   final Box<Todo> todoBox;
 
-  ToDoNotifier(this.todoBox) : super(todoBox.values.toList());
+  ToDoNotifier(this.todoBox)
+    : super(
+        todoBox.values.toList()..sort((a, b) => a.addedAt.compareTo(b.addedAt)),
+      );
 
   //add todo
   void addTodo(String name) {
     final newTodo = Todo(id: math.Random().nextDouble().toString(), name: name);
     todoBox.put(newTodo.id, newTodo);
-    state = todoBox.values.toList();
+    state = todoBox.values.toList()
+      ..sort((a, b) => a.addedAt.compareTo(b.addedAt));
   }
 
   //toggle todo
@@ -27,14 +31,16 @@ class ToDoNotifier extends StateNotifier<List<Todo>> {
     if (todo != null) {
       todo.isCompleted = !todo.isCompleted;
       todo.save();
-      state = todoBox.values.toList();
+      state = todoBox.values.toList()
+        ..sort((a, b) => a.addedAt.compareTo(b.addedAt));
     }
   }
 
   //delete todo
   void deleteTodo(String id) {
     todoBox.delete(id);
-    state = todoBox.values.toList();
+    state = todoBox.values.toList()
+      ..sort((a, b) => a.addedAt.compareTo(b.addedAt));
   }
 }
 
@@ -42,3 +48,6 @@ final todoListProvider = StateNotifierProvider<ToDoNotifier, List<Todo>>((ref) {
   final box = ref.watch(todoBoxProvider);
   return ToDoNotifier(box);
 });
+
+// ..sort((a, b) => b.addedAt.compareTo(a.addedAt)); sorts according to which one was added last.
+// ..sort((a, b) => a.addedAt.compareTo(b.addedAt)); sorts according to which one was added first.

@@ -87,8 +87,11 @@ class HomeScreen extends ConsumerWidget {
                 Expanded(
                   child: todos.isEmpty
                       ? content2
-                      : ListView.builder(
+                      : ListView.separated(
                           itemCount: todos.length,
+                          separatorBuilder: (context, index) => Divider(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
                           itemBuilder: (context, index) {
                             final todo = todos[index];
                             return Dismissible(
@@ -122,6 +125,11 @@ class HomeScreen extends ConsumerWidget {
                                 );
                               },
                               child: ListTile(
+                                tileColor: todo.isCompleted
+                                    ? Theme.of(
+                                        context,
+                                      ).colorScheme.secondaryContainer
+                                    : null,
                                 title: Text(
                                   todo.name,
                                   style: Theme.of(context).textTheme.titleLarge!
@@ -134,11 +142,13 @@ class HomeScreen extends ConsumerWidget {
                                             : TextDecoration.none,
                                       ),
                                 ),
-                                subtitle: Text(
-                                  'Added at: ${DateFormat.yMMMd().add_jm().format(todo.addedAt)}',
-                                  //dateformat comes from intl package.
-                                  //add_jm converts time into 12 hour human readable
-                                ),
+                                subtitle: todo.isCompleted
+                                    ? Text('Done')
+                                    : Text(
+                                        'Added at: ${DateFormat.yMMMd().add_jm().format(todo.addedAt)}',
+                                        //dateformat comes from intl package.
+                                        //add_jm converts time into 12 hour human readable
+                                      ),
                                 leading: Checkbox(
                                   value: todo.isCompleted,
                                   onChanged: (ctx) => ref
