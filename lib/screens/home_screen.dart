@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todo/providers/todo_filter_provider.dart';
 import 'package:flutter_todo/providers/todo_provider.dart';
 import 'package:flutter_todo/utils/add_todo_box.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -12,9 +13,21 @@ class HomeScreen extends ConsumerWidget {
     final allTodos = ref.watch(todoListProvider);
     final todos = ref.watch(filteredTodoProvider);
     final filter = ref.watch(todoFilterProvider);
-    Widget content = Center(child: Text('Your todo\'s will appear here'));
+    Widget content = Center(
+      child: Text(
+        'Your todo\'s will appear here',
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+        ),
+      ),
+    );
     Widget content2 = Center(
-      child: Text('Nothing to show here. Select another.'),
+      child: Text(
+        'Nothing to show here. Select another.',
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+        ),
+      ),
     );
 
     return Scaffold(
@@ -26,18 +39,42 @@ class HomeScreen extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: SegmentedButton<TodoFilter>(
-                    segments: const [
+                    segments: [
                       ButtonSegment(
                         value: TodoFilter.all,
-                        label: Text('All Tasks'),
+                        label: Text(
+                          'All Tasks',
+                          style: Theme.of(context).textTheme.labelLarge!
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                              ),
+                        ),
                       ),
                       ButtonSegment(
                         value: TodoFilter.complete,
-                        label: Text('Completed Tasks'),
+                        label: Text(
+                          'Completed',
+                          style: Theme.of(context).textTheme.labelLarge!
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                              ),
+                        ),
                       ),
                       ButtonSegment(
                         value: TodoFilter.incomplete,
-                        label: Text('Remaining Tasks'),
+                        label: Text(
+                          'Remaining',
+                          style: Theme.of(context).textTheme.labelLarge!
+                              .copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
+                              ),
+                        ),
                       ),
                     ],
                     selected: {filter},
@@ -57,7 +94,16 @@ class HomeScreen extends ConsumerWidget {
                             return Dismissible(
                               background: Container(
                                 color: Theme.of(context).colorScheme.error,
-                                child: Icon(Icons.delete),
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: Theme.of(
+                                    context,
+                                  ).cardTheme.margin!.horizontal,
+                                ),
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
                               ),
                               key: ValueKey(todos[index]),
                               onDismissed: (direction) {
@@ -66,7 +112,10 @@ class HomeScreen extends ConsumerWidget {
                                     .deleteTodo(todo.id);
                                 ScaffoldMessenger.of(context).clearSnackBars();
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                  SnackBar(
+                                    backgroundColor: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                     duration: Duration(seconds: 2),
                                     content: Text('Item removed'),
                                   ),
@@ -75,13 +124,21 @@ class HomeScreen extends ConsumerWidget {
                               child: ListTile(
                                 title: Text(
                                   todo.name,
-                                  style: TextStyle(
-                                    decoration: todo.isCompleted
-                                        ? TextDecoration.lineThrough
-                                        : TextDecoration.none,
-                                  ),
+                                  style: Theme.of(context).textTheme.titleLarge!
+                                      .copyWith(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.secondary,
+                                        decoration: todo.isCompleted
+                                            ? TextDecoration.lineThrough
+                                            : TextDecoration.none,
+                                      ),
                                 ),
-                                subtitle: Text((todo.addedAt).toString()),
+                                subtitle: Text(
+                                  'Added at: ${DateFormat.yMMMd().add_jm().format(todo.addedAt)}',
+                                  //dateformat comes from intl package.
+                                  //add_jm converts time into 12 hour human readable
+                                ),
                                 leading: Checkbox(
                                   value: todo.isCompleted,
                                   onChanged: (ctx) => ref

@@ -19,6 +19,7 @@ ThemeData lighTheme = ThemeData().copyWith(
     color: kLightThemeColor.primaryContainer,
     shadowColor: kLightThemeColor.secondaryContainer,
     elevation: 2,
+    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadiusGeometry.circular(20),
     ),

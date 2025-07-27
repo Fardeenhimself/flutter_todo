@@ -13,13 +13,14 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     foregroundColor: kDarkThemeColor.onPrimaryContainer,
     centerTitle: true,
     elevation: 2,
-    titleSpacing: 1,
+    titleSpacing: 1.5,
   ),
 
   cardTheme: CardThemeData().copyWith(
     color: kDarkThemeColor.primaryContainer,
     shadowColor: kDarkThemeColor.secondaryContainer,
     elevation: 2,
+    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadiusGeometry.circular(20),
     ),
