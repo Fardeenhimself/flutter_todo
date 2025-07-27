@@ -12,6 +12,7 @@ class AddTodoBox extends ConsumerWidget {
       title: const Text('Add New Todo'),
       content: TextField(
         controller: controller,
+        maxLength: 25,
         decoration: InputDecoration(hintText: 'Enter task name'),
       ),
       actions: [
